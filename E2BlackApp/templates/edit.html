@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h1>Edit</h1>
+    <form action="/update/{{one_wish.id}}" method="post">
+        {% csrf_token %}
+        
+        Job:<input name="message" class="form-control w-50" value="{{one_wish.message}}">
+        Description: <input name="description" class="form-control w-50" value="{{one_wish.description}}">
+        Location: <input name="location" class="form-control w-50" value="{{one_wish.location}}">
+        
+        <button type="submit" class="btn btn-primary">Update</button>
+
+    </form>
+    <a href="/success">Go Back!</a>
+    <a href="/logout">Logout!</a>
+
+</body>
+</html>

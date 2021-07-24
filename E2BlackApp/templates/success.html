@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Page</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+
+</head>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<body>
+    <div class="wrapper">
+        <h1>Welcome {{user.first_name}} {{user.last_name}}</h1>
+        {% if request.session.user_id %}
+        <p class='green'>Successfully registered (or logged in)</p>
+        {% endif %}
+        <a href="/logout"><button>Logout</button></a>
+
+    </div>
+
+
+
+    <form action="/make_a_wish">
+        <input type="submit" value="New Job" />
+    </form>
+
+    {% for one_wish in wall_messages.users_who_grant.id.all %}
+    {one_wish.id}
+    {% endfor %}
+    </div>
+
+
+    
+
+    <body>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <h1>Jobs Unassigned</h1>
+
+
+
+        {% for one_wish in wall_messages %}
+        {% if one_wish.granted_wish is False %}
+        <tr>
+            <h4>{{one_wish.message}}</h4>
+            {% if current_user.id == one_wish.poster.id %}
+
+
+            <a href="/edit/{{one_wish.id}}" role="button" class="btn btn-danger">Edit /</a>
+
+
+
+
+            <a href="/delete_message/{{one_wish.id}}" role="button" class="btn btn-danger">Remove /</a>
+
+
+            {% endif %}
+            <td>
+                <a href="/like_message/{{one_wish.id}}" role="button" class="btn btn-danger">Add/</a>
+
+            </td>
+            <td>Created at: {{one_wish.created_at}} Created by {{one_wish.poster.first_name}}
+                {{one_wish.poster.last_name}}</td>
+                <a href="/book_page/{{one_wish.id}}">View</a>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+        </tbody>
+        </table>
+        <div></div>
+        <h1>{{user.first_name}}'s Jobs</h1>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class='green' {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% for wish in wall_messages reversed %}
+        {% if wish.granted_wish is True %}
+        <div class='one_post'>
+            {% if current_user.id == wish.user_who_grants.id%}
+            <h3>{{wish.message}}</h3>
+            <p>{{wish.user_who_grants.first_name}} {{wish.user_who_grants.last_name}}'s Job</p>
+            <p>{{wish.updated_at}}</p>
+            <a href="/delete_message/{{wish.id}}">Done</a>
+
+            <a href="/book_page/{{wish.id}}">View</a>
+            <a href="/unlike_message/{{wish.id}}">Give Up</a>
+            {%endif%}
+        
+        
+                {% endif %}
+                {% endfor %}
+
+            </div>
+
+
+    </body>
+
+</html>

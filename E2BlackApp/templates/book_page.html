@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Stats</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    <h1>Hello {{user.first_name}}. These are your job details!</h1>
+    <a href="/logout"><button>Logout</button></a>
+    <a href="/success">Go Back</a>
+    <a href="/success">Dashboard</a>
+    
+   
+
+
+    <h3>Job Details</h3>
+
+  
+    <h2>Job: {{job.message}}</h2>
+    <h3>Description: {{job.description}}</h3>
+    <p>Location: {{job.location}}</p>
+    <p>Posted by: {{job.poster.first_name}} {{job.poster.last_name}}</p>
+    <p>Posted on: {{job.created_at}}</p>
+    <p>Cagegories: {{job.electrical}}, {{job.garden}}, {{job.pet_care}}, {{job.other}}</p>
+    {% if job.granted_wish is False %}
+    <a href="/like_message/{{job.id}}" role="button" class="btn btn-danger">Add to My Jobs</a>
+    {% endif %}
+    {% if job.granted_wish is True %}
+    <a href="/unlike_message/{{job.id}}" role="button" class="btn btn-danger">Give Up</a>
+    {% endif %}

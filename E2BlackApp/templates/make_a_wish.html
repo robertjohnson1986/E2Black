@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+    {% if messages %}
+<ul class="messages">    
+    {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+    {% endfor %}
+</ul>
+{% endif %}
+    
+    <h1>Hello {{user.first_name}}. Create a Job!</h1>
+    <a href="/logout"><button>Logout</button></a>
+    <a href="/success">Go Back</a>
+    <form action="/post_title" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Job:</label>
+            <input type="text" class="form-control" name="message">
+            <label for="title">Description:</label>
+            <input type="text" class="form-control" name="description">
+            <label for="title">Location:</label>
+            <input type="text" class="form-control" name="location">
+            <br>
+            Category:<br>
+                <input type="checkbox" id="cagegory1" required name="pet_care" value="pet_care">
+                <label for="category1"> Pet Care</label><br>
+                <input type="checkbox" id="category2" required name="electrical" value="electrical">
+                <label for="category2"> Electrical</label><br>
+                <input type="checkbox" id="category3" required name="garden" value="garden">
+                <label for="category3"> Garden </label><br>
+                <input type="text" id="category4" required class="form-control" name="other">
+                <label for="category4">Other:</label>
+
+              
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% for one_wish in wall_messages.users_who_grant.id.all %}
+    {one_wish.id}
+    {% endfor %}
+</div>
+    
+</body>
+</html>
